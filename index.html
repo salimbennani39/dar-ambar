@@ -341,7 +341,7 @@
           <div class="summary">
             <p id="summary" aria-live="polite"></p>
             <div class="actions">
-              <a class="btn btn--fill" href="tel:+34647591229">Call to book</a>
+              <a class="btn btn--fill" href="https://salimbennani39.github.io/showcase/404.html">Call to book</a>
               <button class="btn" type="button" id="copy">Copy request</button>
             </div>
             <p class="note">Le Jardin Nakhil, +34 647 591 229. Ask for Dar Ambar and read your request. The team confirms availability on the call.</p>
@@ -356,7 +356,7 @@
     <div class="sc-wrap" data-sc-in data-sc-stagger="90">
       <img class="close__logo" src="assets/logo.png" alt="Dar Ambar logo: the name above a band of carved zellige pattern.">
       <h2 class="sc-display">We will keep a quiet table for you.</h2>
-      <a class="close__phone" href="tel:+34647591229">+34 647 591 229</a>
+      <a class="close__phone" href="https://salimbennani39.github.io/showcase/404.html">+34 647 591 229</a>
       <p class="close__addr">Dar Ambar, at Le Jardin Nakhil<br>Avenue Mohammed VI, Marrakech, Morocco</p>
       <a class="btn" href="#" rel="noopener" target="_blank">@darambar.marrakech</a>
       <div class="colophon">
@@ -398,10 +398,12 @@
     setTimeout(() => e.target.textContent = 'Copy request', 2200);
   });
 </script>
-<script>/* showcase: links that lead nowhere open the Showcase 404 */
+<script>/* showcase: links that lead nowhere, and booking / WhatsApp / call links, open the Showcase 404 */
 (()=>{const U='https://salimbennani39.github.io/showcase/404.html';
-const dead=a=>{const h=(a.getAttribute('href')||'').trim();return h===''||h==='#'||h==='#!'||/^javascript:/i.test(h)};
-addEventListener('click',e=>{if(e.defaultPrevented)return;const a=e.target.closest&&e.target.closest('a');
-if(a&&dead(a)){e.preventDefault();location.href=U;}});})();</script>
+const dead=a=>{const h=(a.getAttribute('href')||'').trim();return h===''||h==='#'||h==='#!'||/^javascript:/i.test(h)||/^(tel:|sms:|mailto:|https?:\/\/(api\.|web\.)?(wa\.me|whatsapp\.com))/i.test(h)};
+addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a');if(!a)return;
+const h=(a.getAttribute('href')||'').trim();const contact=/^(tel:|sms:|mailto:|https?:)/i.test(h);
+if(dead(a)&&(contact||!e.defaultPrevented)){e.preventDefault();e.stopImmediatePropagation();location.href=U;}},true);
+const o=window.open;window.open=function(u){if(/(wa\.me|whatsapp\.com|^tel:)/i.test(String(u||'')))return location.href=U,null;return o.apply(this,arguments)};})();</script>
 </body>
 </html>
